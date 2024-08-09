@@ -56,6 +56,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool toogledRight = false;
 
   void _incrementCounter() {
     setState(() {
@@ -105,6 +106,46 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 1000),
+              height: 40,
+              width: 100,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: toogledRight
+                      ? Colors.greenAccent[100]
+                      : Colors.redAccent[100]!.withOpacity(0.5)),
+              child: Stack(
+                children: <Widget>[
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.bounceIn,
+                    top: 3.0,
+                    left: toogledRight ? 60.0 : 0,
+                    right: toogledRight ? 0 : 60.0,
+                    child: InkWell(
+                      onTap: toggleButton,
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 1000),
+                        transitionBuilder:
+                            (Widget child, Animation<double> animation) {
+                          return RotationTransition(
+                              child: child, turns: animation);
+                        },
+                        child: toogledRight
+                            ? const Icon(Icons.check_circle,
+                                color: Colors.green, size: 35.0)
+                            : const Icon(
+                                Icons.remove_circle_outline,
+                                color: Colors.red,
+                                size: 35,
+                              ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -121,5 +162,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  toggleButton() {
+    setState(() {
+      toogledRight = !toogledRight;
+    });
   }
 }
