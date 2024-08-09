@@ -4,5 +4,7 @@ A new Flutter project to research animated container, nothing more.
 
 ## Getting Started
 
+initial inspo from YT video: https://youtu.be/XI3LFEvagBY?si=agAYHTHDgDT04qEw
 
-** will update later
+<!-- TODO -->
+** will update later *TODO
