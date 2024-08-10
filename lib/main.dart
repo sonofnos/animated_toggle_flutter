@@ -106,6 +106,22 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              /// width and height for shrinkwrap to take effect
+              width: 50,
+              height: 30,
+              child: Switch(
+                value: toogledRight,
+                onChanged: _toggleSwitch,
+                activeTrackColor: Colors.redAccent[100]!.withOpacity(0.5),
+                activeColor: Colors.greenAccent[100],
+                materialTapTargetSize:
+                    MaterialTapTargetSize.shrinkWrap, //added this
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             AnimatedContainer(
               duration: const Duration(milliseconds: 1000),
               height: 40,
@@ -162,6 +178,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _toggleSwitch(bool value) {
+    setState(() {
+      toogledRight = value;
+    });
   }
 
   toggleButton() {
